@@ -6,6 +6,7 @@ using UnityEngine;
 public class BuildingGhost : MonoBehaviour
 {
     public GameObject spriteGameObject;
+    #region Unity Methods
     private void Awake()
     {
         spriteGameObject = transform.Find("sprite").gameObject;
@@ -13,6 +14,16 @@ public class BuildingGhost : MonoBehaviour
         Hide();
     }
     private void Start()
+    {
+        SubscribeEvents();
+    }
+    private void Update()
+    {
+        transform.position = UtilsClass.GetMouseWorldPosition();
+    }
+    #endregion
+    #region Event Subscribtion
+    private void SubscribeEvents()
     {
         BuildingManager.Instance.OnActiveBuildingTypeChanged += OnActiveBuildingTypeChanged;
     }
@@ -24,12 +35,8 @@ public class BuildingGhost : MonoBehaviour
             Hide();
         else
             Show(_activeBuildingType.sprite);
-    }
-
-    private void Update()
-    {
-        transform.position = UtilsClass.GetMouseWorldPosition();
-    }
+    } 
+    #endregion
     private void Show(Sprite ghostSprite)
     {
         spriteGameObject.SetActive(true);

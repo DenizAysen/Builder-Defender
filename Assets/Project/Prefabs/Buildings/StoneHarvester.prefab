@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7429382088866013480}
   - component: {fileID: 7429382088866013483}
+  - component: {fileID: 3505963058669976386}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 793ca27a5a3378149aaa12abe85933f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2263e91ebcd2a254dab5f4caccb4a7af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3505963058669976386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429382088866013481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756e6abaa1acb2a468c6e3a9781eb6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runOnce: 1
+  positionOffsetY: 0
 --- !u!1 &7429382089534944041
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,10 +108,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7429382089534944040}
-  - component: {fileID: -1336149906865598253}
-  - component: {fileID: 3543401809519841451}
+  - component: {fileID: 7110974574886065361}
+  - component: {fileID: 5625231715988800338}
   m_Layer: 0
-  m_Name: WoodHarvester
+  m_Name: StoneHarvester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +133,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1336149906865598253
+--- !u!114 &7110974574886065361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741d49f4f41fabe4c87e56d430f3d461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3543401809519841451
+--- !u!114 &5625231715988800338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,4 +157,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d109918bec3624c49a8feeb3d5b9a528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: {fileID: 11400000, guid: 698d174630f96be4490b3dff3cbac921, type: 2}
+  buildingType: {fileID: 11400000, guid: bdddec45b66fcf040b172138320616cd, type: 2}

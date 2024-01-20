@@ -4,23 +4,55 @@ using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    private BuildingTypeSO buildingTypeSO;
+    private List<ResourceNode> _nearResourceNodes;
+    private ResourceGeneratorData _resourceGeneratorData;
 
-    private float timer;
-    private float timerMax;
+    private float _timer;
+    private float _timerMax;
     private void Awake()
     {
-        buildingTypeSO = GetComponent<BuildingTypeHolder>().buildingType;
-        timerMax = buildingTypeSO.resourceGeneratorData.timerMax;
+        _resourceGeneratorData = GetComponent<BuildingTypeHolder>().buildingType.resourceGeneratorData;
+        _timerMax = _resourceGeneratorData.timerMax;
+        _nearResourceNodes = new List<ResourceNode>();
+    }
+    private void Start()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _resourceGeneratorData.resourceDetectionRadius);
+        int nearbyResourceAmount = 0;
+        foreach (Collider2D collider in colliders)
+        {
+            ResourceNode resourceNode = collider.GetComponent<ResourceNode>();
+
+            if (resourceNode != null)
+            {
+                if(resourceNode.resourceType == _resourceGeneratorData.resourceType)
+                {
+                _nearResourceNodes.Add(resourceNode);
+                nearbyResourceAmount++;
+                }
+            }
+        }
+        nearbyResourceAmount = Mathf.Clamp(nearbyResourceAmount, 0, _resourceGeneratorData.maxResourceAmount);
+
+        if (nearbyResourceAmount == 0)
+            enabled = false;
+        else
+        {
+            _timerMax = (_resourceGeneratorData.timerMax / 2f) +
+                _resourceGeneratorData.timerMax * (1 - (float)nearbyResourceAmount / _resourceGeneratorData.maxResourceAmount);
+        }
+
+
+        Debug.Log("nearbyResourceAmount : " + nearbyResourceAmount + " ; timerMax :"+_timerMax);
     }
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        _timer -= Time.deltaTime;
+        if (_timer <= 0f)
         {
-            timer = timerMax;
-            Debug.Log("Ding "+buildingTypeSO.resourceGeneratorData.resourceType.nameString);
-            ResourceManager.Instance.AddResource(buildingTypeSO.resourceGeneratorData.resourceType, 1);
+            _timer = _timerMax;
+            Debug.Log("Ding "+_resourceGeneratorData.resourceType.nameString);
+            ResourceManager.Instance.AddResource(_resourceGeneratorData.resourceType, 1);
         }
     }
 }
