@@ -21,3 +21,6 @@ MonoBehaviour:
     maxResourceAmount: 4
   sprite: {fileID: 21300000, guid: 2263e91ebcd2a254dab5f4caccb4a7af, type: 3}
   minConstractionRadius: 7
+  constractionResourceCostArray:
+  - resourceType: {fileID: 11400000, guid: e2431f6fa2cdf03418f8ad84b6c1fb61, type: 2}
+    amount: 30
