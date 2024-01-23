@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class BuildingManager : MonoBehaviour
 {
+    [SerializeField] private Building hqBuilding;
     #region Privates
     private Camera _mainCamera;
     private BuildingTypeSO _activeBuildingType;
@@ -55,7 +56,11 @@ public class BuildingManager : MonoBehaviour
                 }
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Vector3 enemySpawnPos = UtilsClass.GetMouseWorldPosition() + UtilsClass.GetRandomDir() * 5f;
+            Enemy.Create(enemySpawnPos);
+        }
     } 
     #endregion
     private Vector3 GetMouseWorldPosition()
@@ -113,5 +118,9 @@ public class BuildingManager : MonoBehaviour
 
         errorMessage = "Too far from any other building!";
         return false;
+    }
+    public Building GetHQBuilding()
+    {
+        return hqBuilding;
     }
 }
