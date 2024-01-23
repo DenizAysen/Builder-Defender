@@ -34,7 +34,17 @@ public class BuildingTypeSelectUI : MonoBehaviour
         {
             BuildingManager.Instance.SetActiveBuildingType(null);
         });
+
+        MouseEnterExitEvents mouseEnterExitEvents = arrowBtn.GetComponent<MouseEnterExitEvents>();
+        mouseEnterExitEvents.OnMouseEnter += () => {
+            ToolTipUI.Instance.Show("Arrow");
+        };
+        mouseEnterExitEvents.OnMouseExit += () => {
+            ToolTipUI.Instance.Hide();
+        };
+
         index++;
+
         foreach (BuildingTypeSO buildingType in _buildingTypeList.list)
         {
             if (ignoreBuildingTypeList.Contains(buildingType)) continue;
@@ -51,6 +61,14 @@ public class BuildingTypeSelectUI : MonoBehaviour
             {
                 BuildingManager.Instance.SetActiveBuildingType(buildingType);
             });
+
+            mouseEnterExitEvents = btnTransform.GetComponent<MouseEnterExitEvents>();
+            mouseEnterExitEvents.OnMouseEnter += () => {
+                ToolTipUI.Instance.Show(buildingType.nameString + "\n" + buildingType.GetConstractionResourceString());
+            };
+            mouseEnterExitEvents.OnMouseExit += () => {
+                ToolTipUI.Instance.Hide();
+            };
 
             btnTransfomDictionary[buildingType] = btnTransform;
 

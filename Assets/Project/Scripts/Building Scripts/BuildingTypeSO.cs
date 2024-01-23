@@ -11,4 +11,14 @@ public class BuildingTypeSO : ScriptableObject
     public Sprite sprite;
     public float minConstractionRadius;
     public ResourceAmount[] constractionResourceCostArray;
+    public string GetConstractionResourceString()
+    {
+        string str = "";
+        foreach (ResourceAmount resourceAmount in constractionResourceCostArray)
+        {
+            str += "<color=#" + resourceAmount.resourceType.colorHex + ">" +
+                resourceAmount.resourceType.nameShort + resourceAmount.amount + "</color> ";
+        }
+        return str;
+    }
 }

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: -1336149906865598253}
   - component: {fileID: 3543401809519841451}
   - component: {fileID: 1567423046572425356}
+  - component: {fileID: 2699305319869002322}
+  - component: {fileID: -4067049675878432739}
   m_Layer: 0
   m_Name: 'GoldHarvester '
   m_TagString: Untagged
@@ -87,6 +89,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6, y: 4.4429626}
   m_EdgeRadius: 0
+--- !u!114 &2699305319869002322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429382089534944041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2bcf8b07979304ea9a4c0a38dcedf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmountMax: 100
+--- !u!114 &-4067049675878432739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429382089534944041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1f136622c3e8b4cace5a975f6f957b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1054964043584264382
 PrefabInstance:
   m_ObjectHideFlags: 0
