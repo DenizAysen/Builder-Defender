@@ -25,6 +25,16 @@ public class HealthSystem : MonoBehaviour
             OnDied?.Invoke();
     }
     public bool IsDead() => _healthAmount == 0;
+    public bool IsFullHealth() => _healthAmount == healthAmountMax;
     public int GetHealthAmount() => _healthAmount;
     public float GetHealthAmountNormalized() => (float)_healthAmount / healthAmountMax;
+    public void SetHealthAmountMax(int healthAmountMax, bool updateHealthAmount)
+    {
+        this.healthAmountMax = healthAmountMax;
+
+        if (updateHealthAmount)
+        {
+            _healthAmount = healthAmountMax;
+        }
+    }
 }

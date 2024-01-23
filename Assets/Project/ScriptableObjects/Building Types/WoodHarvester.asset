@@ -24,3 +24,4 @@ MonoBehaviour:
   constractionResourceCostArray:
   - resourceType: {fileID: 11400000, guid: e2431f6fa2cdf03418f8ad84b6c1fb61, type: 2}
     amount: 10
+  healthAmountMax: 100
