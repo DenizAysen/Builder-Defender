@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     #region Privates
     private Rigidbody2D _rigidbody;
     private Transform _targetTransform;
+    private HealthSystem _healthSystem;
 
     private Vector3 _moveDir;
     private float _moveSpeed;
@@ -23,18 +24,39 @@ public class Enemy : MonoBehaviour
         _targetMaxRadius = 10f;
         _lookForTargetTimerMax = .2f;
         _lookForTargetTimer = Random.Range(0f, _lookForTargetTimerMax);
+        _healthSystem = GetComponent<HealthSystem>();
     }
     private void Start()
     {
         _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
+        SubsribeEvents();
     }
     private void Update()
     {
         HandleMovement();
 
         HandleTargeting();
-    } 
+    }
     #endregion
+    private void SubsribeEvents()
+    {
+        _healthSystem.OnDied += OnDied;
+    }
+
+    private void OnDied()
+    {
+        Destroy(gameObject);
+    }
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
+
+    private void UnSubscribeEvents()
+    {
+        _healthSystem.OnDied -= OnDied;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Building building = collision.gameObject.GetComponent<Building>();
@@ -75,7 +97,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        if(_targetTransform == null)
+        if(_targetTransform == null && BuildingManager.Instance.GetHQBuilding().transform != null)
         {
             _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
         }

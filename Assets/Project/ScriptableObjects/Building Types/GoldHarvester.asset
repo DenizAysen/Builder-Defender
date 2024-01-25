@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameString: Gold Harvester
   prefab: {fileID: 7429382089534944040, guid: b0be27dba3539334a9a8ab0f5489227f, type: 3}
+  hasResourceGeneratorData: 1
   resourceGeneratorData:
     timerMax: 2
     resourceType: {fileID: 11400000, guid: 5930258710997df4ab3ad96a3653796f, type: 2}

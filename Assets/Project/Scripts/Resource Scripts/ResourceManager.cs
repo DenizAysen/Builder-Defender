@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
+    [SerializeField] private List<ResourceAmount> startingResourceAmountList;
+
     private Dictionary<ResourceTypeSO, int> _resourceAmountDictionary;
     private ResourceTypeListSO _resourceTypeList;
 
@@ -26,6 +28,10 @@ public class ResourceManager : MonoBehaviour
         foreach (ResourceTypeSO resourceType in _resourceTypeList.list)
         {
             _resourceAmountDictionary[resourceType] = 0;
+        }
+        foreach (ResourceAmount resourceAmount in startingResourceAmountList)
+        {
+            AddResource(resourceAmount.resourceType, resourceAmount.amount);
         }
     }
     private void TestLogResourceAmountDictionary()
