@@ -42,11 +42,13 @@ public class Building : MonoBehaviour
     private void OnDamaged()
     {
         ShowBuildingRepairBtn();
+        SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDamaged);
     }
 
     private void OnDied()
     {
         Destroy(gameObject);
+        SoundManager.Instance.PlaySound(SoundManager.Sound.BuildingDestroyed);
     }
     private void OnDisable()
     {

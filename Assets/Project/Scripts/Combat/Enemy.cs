@@ -43,10 +43,17 @@ public class Enemy : MonoBehaviour
     private void SubsribeEvents()
     {
         _healthSystem.OnDied += OnDied;
+        _healthSystem.OnDamaged += OnDamaged;
+    }
+
+    private void OnDamaged()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyHit);
     }
 
     private void OnDied()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
         Destroy(gameObject);
     }
     private void OnDisable()
