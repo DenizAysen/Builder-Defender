@@ -30,7 +30,15 @@ public class BuildingManager : MonoBehaviour
         _mainCamera = Camera.main;
 
         _buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+
+        hqBuilding.GetComponent<HealthSystem>().OnDied += OnHQDied;
     }
+
+    private void OnHQDied()
+    {
+        GameOverUI.Instance.Show();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
@@ -42,7 +50,8 @@ public class BuildingManager : MonoBehaviour
                     if (ResourceManager.Instance.CanAffordCost(_activeBuildingType.constractionResourceCostArray))
                     {
                         ResourceManager.Instance.SpendResources(_activeBuildingType.constractionResourceCostArray);
-                        Instantiate(_activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+                        //Instantiate(_activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+                        BuildingConstruction.Create(UtilsClass.GetMouseWorldPosition(), _activeBuildingType);
                     }
                     else
                     {

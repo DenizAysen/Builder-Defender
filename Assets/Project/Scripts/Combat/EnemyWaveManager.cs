@@ -28,6 +28,16 @@ public class EnemyWaveManager : MonoBehaviour
     private int _remainingEnemySpawnAmount;
     private int _waveNumber;
     #endregion
+    public static EnemyWaveManager Instance { get; private set; }
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
     private void Start()
     {
         _waveState = WaveState.WaitingToSpawnNextWave;

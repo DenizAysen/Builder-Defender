@@ -28,7 +28,9 @@ public class Enemy : MonoBehaviour
     }
     private void Start()
     {
-        _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
+        if (BuildingManager.Instance.GetHQBuilding() != null)
+            _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
+
         SubsribeEvents();
     }
     private void Update()
@@ -97,9 +99,12 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        if(_targetTransform == null && BuildingManager.Instance.GetHQBuilding().transform != null)
+        if(_targetTransform == null)
         {
-            _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
+            if(BuildingManager.Instance.GetHQBuilding() != null)
+            {
+                _targetTransform = BuildingManager.Instance.GetHQBuilding().transform;
+            }
         }
     }
     private void HandleMovement()
