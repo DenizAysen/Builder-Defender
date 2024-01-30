@@ -6,15 +6,23 @@ using UnityEngine.UI;
 
 public class OptionsUI : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private MusicManager musicManager;
+    #endregion
 
+    #region Privates
     private TextMeshProUGUI _soundVolumeText;
     private TextMeshProUGUI _musicVolumeText;
+
+    private Toggle _toggle;
+    #endregion
     private void Awake()
     {
         _soundVolumeText = transform.Find("soundVolumeText").GetComponent<TextMeshProUGUI>();
         _musicVolumeText = transform.Find("musicVolumeText").GetComponent<TextMeshProUGUI>();
+
+        _toggle = transform.Find("edgeScrollingToggle").GetComponent<Toggle>();
 
         transform.Find("soundIncreaseBtn").GetComponent<Button>().onClick.AddListener(() => {
             soundManager.IncreaseVolume();
@@ -36,9 +44,16 @@ public class OptionsUI : MonoBehaviour
             Time.timeScale = 1f;
             GameSceneManager.Load(GameSceneManager.Scene.MainMenuScene);
         });
+
+        _toggle.onValueChanged.AddListener((bool set) => {
+            CameraHandler.Instance.SetEdgeScrolling(set);
+        });
+        
     }
     private void Start()
     {
+        _toggle.SetIsOnWithoutNotify(CameraHandler.Instance.GetEdgeScrolling());
+
         UpdateText();
         gameObject.SetActive(false);
     }

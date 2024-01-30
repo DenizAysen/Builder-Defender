@@ -24,8 +24,8 @@ MonoBehaviour:
   minConstractionRadius: 7
   constractionResourceCostArray:
   - resourceType: {fileID: 11400000, guid: e2431f6fa2cdf03418f8ad84b6c1fb61, type: 2}
-    amount: 50
+    amount: 200
   - resourceType: {fileID: 11400000, guid: 0e49905179dd27c47bef413477c44f27, type: 2}
-    amount: 50
+    amount: 200
   healthAmountMax: 100
-  constructionTimerMax: 5
+  constructionTimerMax: 15

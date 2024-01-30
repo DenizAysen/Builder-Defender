@@ -49,11 +49,16 @@ public class Enemy : MonoBehaviour
     private void OnDamaged()
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyHit);
+        CinemachineShake.Instance.ShakeCamera(5f, .1f);
+        ChromacticAberrationEffect.Instance.SetWeight(.5f);
     }
 
     private void OnDied()
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDie);
+        CinemachineShake.Instance.ShakeCamera(7f, .15f);
+        ChromacticAberrationEffect.Instance.SetWeight(.5f);
+        Instantiate(GameAssets.Instance.enemyDieParticlesPrefab, transform.position , Quaternion.identity);
         Destroy(gameObject);
     }
     private void OnDisable()
@@ -64,6 +69,7 @@ public class Enemy : MonoBehaviour
     private void UnSubscribeEvents()
     {
         _healthSystem.OnDied -= OnDied;
+        _healthSystem.OnDamaged -= OnDamaged;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,13 +80,12 @@ public class Enemy : MonoBehaviour
         {
             HealthSystem healthSystem = building.GetComponent<HealthSystem>();
             healthSystem.Damage(10);
-            Destroy(gameObject);
+            _healthSystem.Damage(999);
         }
     }
     public static Enemy Create(Vector3 position)
     {
-        Transform enemyPrefab = Resources.Load<Transform>("Enemy");
-        Transform enemyTransform = Instantiate(enemyPrefab, position, Quaternion.identity);
+        Transform enemyTransform = Instantiate(GameAssets.Instance.enemyPrefab, position, Quaternion.identity);
         Enemy enemy = enemyTransform.GetComponent<Enemy>();
         return enemy;
     }

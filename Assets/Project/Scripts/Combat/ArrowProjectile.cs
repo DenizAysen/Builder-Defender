@@ -55,8 +55,7 @@ public class ArrowProjectile : MonoBehaviour
     #endregion
     public static ArrowProjectile Create(Vector3 position , Enemy targetEnemy)
     {
-        Transform arrowPrefab = Resources.Load<Transform>("ArrowProjectile");
-        Transform arrowTransform = Instantiate(arrowPrefab, position, Quaternion.identity);
+        Transform arrowTransform = Instantiate(GameAssets.Instance.arrowProjectilePrefab, position, Quaternion.identity);
 
         ArrowProjectile arrow = arrowTransform.GetComponent<ArrowProjectile>();
         arrow.SetTarget(targetEnemy);

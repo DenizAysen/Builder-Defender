@@ -8,6 +8,7 @@ public class HealthSystem : MonoBehaviour
     public Action OnDamaged;
     public Action OnHealed;
     public Action OnDied;
+    public Action OnHealthAmountMaxChanged;
 
     [SerializeField] private int healthAmountMax;
     private int _healthAmount;
@@ -38,6 +39,7 @@ public class HealthSystem : MonoBehaviour
         {
             _healthAmount = healthAmountMax;
         }
+        OnHealthAmountMaxChanged?.Invoke();
     }
     public void Heal(int healAmount)
     {

@@ -50,7 +50,16 @@ public class BuildingGhost : MonoBehaviour
                 resourceNearbyOverlay.Hide();
             }
         }
-    } 
+    }
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
+
+    private void UnSubscribeEvents()
+    {
+        BuildingManager.Instance.OnActiveBuildingTypeChanged -= OnActiveBuildingTypeChanged;
+    }
     #endregion
     private void Show(Sprite ghostSprite)
     {

@@ -68,7 +68,7 @@ public class BuildingManager : MonoBehaviour
             }
         }
        
-    } 
+    }
     #endregion
     private Vector3 GetMouseWorldPosition()
     {
@@ -109,6 +109,19 @@ public class BuildingManager : MonoBehaviour
                 }
             } 
         }
+
+        if (buildingType.hasResourceGeneratorData)
+        {
+            ResourceGeneratorData resourceGeneratorData = buildingType.resourceGeneratorData;
+            int _nearbyResourceAmount = ResourceGenerator.GetNearbyResourceAmount(resourceGeneratorData, position);
+
+            if(_nearbyResourceAmount == 0)
+            {
+                errorMessage = "There are no nearby Resource Nodes!";
+                return false;
+            }
+        }
+        
 
         float maxConstractionRadius = 25f;
         colliders = Physics2D.OverlapCircleAll(position, maxConstractionRadius);

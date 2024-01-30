@@ -7,8 +7,27 @@ public class CameraHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera cmVCamera;
 
+    #region Privates
     private float orthographicSize;
     private float targetOrthographicSize;
+
+    private bool _edgeScrolling;
+    #endregion
+    #region Singleton
+    public static CameraHandler Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        _edgeScrolling = PlayerPrefs.GetInt("edgeScrolling", 1) == 1;
+    } 
+    #endregion
     private void Start()
     {
         orthographicSize = cmVCamera.m_Lens.OrthographicSize;
@@ -24,6 +43,28 @@ public class CameraHandler : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
+        if (_edgeScrolling)
+        {
+            float edgeScrolingSize = 30f;
+            if (Input.mousePosition.x > Screen.width - edgeScrolingSize)
+            {
+                x = 1f;
+            }
+            if (Input.mousePosition.x < edgeScrolingSize)
+            {
+                x = -1f;
+            }
+
+            if (Input.mousePosition.y > Screen.height - edgeScrolingSize)
+            {
+                y = 1f;
+            }
+            if (Input.mousePosition.y < edgeScrolingSize)
+            {
+                y = -1f;
+            }
+        }
+       
         Vector3 moveDir = new Vector3(x, y).normalized;
         float moveSpeed = 30f;
 
@@ -44,4 +85,10 @@ public class CameraHandler : MonoBehaviour
 
         cmVCamera.m_Lens.OrthographicSize = orthographicSize;
     }
+    public void SetEdgeScrolling(bool edgeScrolling)
+    {
+        _edgeScrolling = edgeScrolling;
+        PlayerPrefs.SetInt("edgeScrolling", edgeScrolling ? 1 : 0);
+    }
+    public bool GetEdgeScrolling() => _edgeScrolling;
 }
